@@ -7,14 +7,14 @@
 		duration: 500,
 		easing: quintInOut,
 		delay: 0,
-
 	});
 	const deltaX = tweened(1, {
 		duration: 500,
 		easing: quintInOut,
 		delay: 0,
 	});
-	function handleClick() {
+	function handleClick(e: MouseEvent) {
+		e.stopPropagation();
 		if (!x) {
 			if ($deltaX === 1) $deltaX = 0;
 			if ($deltaY === 0) $deltaY = 1;
@@ -24,10 +24,17 @@
 		}
 		x = !x;
 	}
-	$: console.log(22 - 22 * $deltaY);
+	$: console.log(x);
 </script>
 
-<main>
+<main
+	on:click={(e) => {
+		e.stopPropagation();
+		x = false;
+		$deltaX = 1;
+		$deltaY = 0
+	}}
+>
 	<svg
 		on:click={handleClick}
 		width="25"
@@ -38,7 +45,7 @@
 			x1="1"
 			x2="24"
 			y1="2"
-			y2={25 * $deltaY + ($deltaY  < .5 ? 2 : -2)}
+			y2={25 * $deltaY + ($deltaY < 0.5 ? 2 : -2)}
 			stroke="black"
 			stroke-width="4"
 		/>
@@ -54,7 +61,7 @@
 			x1="1"
 			x2="24"
 			y1="23"
-			y2={25 * $deltaX + ($deltaX  < .5 ? 3 : -2)}
+			y2={25 * $deltaX + ($deltaX < 0.5 ? 3 : -2)}
 			stroke="black"
 			stroke-width="4"
 		/>
@@ -67,6 +74,7 @@
 		padding: 1em;
 		max-width: 240px;
 		margin: 0 auto;
+		min-height: 100vh;
 	}
 	svg {
 		/* border: 1px solid red; */
