@@ -4,13 +4,13 @@
 	import { tweened } from 'svelte/motion';
 	let x = false;
 	const deltaY = tweened(0, {
-		duration: 1000,
+		duration: 500,
 		easing: quintInOut,
 		delay: 0,
 
 	});
 	const deltaX = tweened(1, {
-		duration: 1000,
+		duration: 500,
 		easing: quintInOut,
 		delay: 0,
 	});
@@ -69,7 +69,7 @@
 		margin: 0 auto;
 	}
 	svg {
-		border: 1px solid red;
+		/* border: 1px solid red; */
 		/* border-radius: 8px; */
 	}
 
